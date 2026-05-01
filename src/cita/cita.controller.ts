@@ -3,9 +3,12 @@ import { CitaService } from './cita.service';
 import { CreateCitaDto } from './dto/create-cita.dto';
 import { UpdateCitaDto } from './dto/update-cita.dto';
 import { AuthGuard } from '../auth/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+
+@ApiBearerAuth('access-token') // 👈 mismo nombre
 @UseGuards(AuthGuard)
-@Controller('/citas')
+@Controller('citas')
 export class CitaController {
   constructor(private readonly citaService: CitaService) {}
 

@@ -12,11 +12,18 @@ async function bootstrap() {
   }));
 
   const config = new DocumentBuilder()
-    .setTitle('API Citas Médicas')
-    .setDescription('CRUD de citas con JWT')
-    .setVersion('1.0')
-    .addBearerAuth() // importante para JWT
-    .build();
+  .setTitle('API Citas Médicas')
+  .setDescription('CRUD de citas con JWT')
+  .setVersion('1.0')
+  .addBearerAuth(
+    {
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT',
+    },
+    'access-token', // 👈 nombre importante
+  )
+  .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
